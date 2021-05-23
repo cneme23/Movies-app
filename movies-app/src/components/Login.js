@@ -8,6 +8,7 @@ const Login= (props) =>{
                     <CTALogoOne src="/images/cta-logo-one.svg" alt=""/>
                     <SignUp>GET ALL THERE</SignUp>
                     <Description>Get Premier access o Raya and the last Dragon with Movies app </Description>
+                    <CTALogoTwo src="/images/cta-logo-two.png" alt="" />
                 </CTA>
                 <BgImage/> 
             </Content>
@@ -97,5 +98,14 @@ margin:0 0 24px;
 line-height: 1.5;
 letter-spacing: 1.5px;
 `;
+
+const CTALogoTwo = styled.img`
+max-width: 600px;
+margin-bottom: 20px;
+display:inline-block;
+vertical-align: bottom;
+width: 100%;
+`;
+
 
 export default Login;
