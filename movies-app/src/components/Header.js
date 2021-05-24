@@ -1,4 +1,5 @@
 import React from "react";
+import {useEffect} from "react";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
 //useDispatch nos va a permitir mandar acciones a nuestro Store y selector nos va a permitir traer cosas de nuestro store
@@ -12,6 +13,18 @@ const Header = (props) => {
     const history = useHistory();
     const userName= useSelector(selectUserName);
     const userPhoto = useSelector(selectUserPhoto);
+    //La primera funcion se va a ejecutar solo cuando el estado de userName se modifique
+    useEffect(() => {
+        auth.onAuthStateChanged(async (user) => {
+            if(user){
+                setUser(user);
+                history.push("/home");
+            }
+        });
+    },[userName]);
+
+
+    
     //Aca defino la funcion que me va a permitir realizar la autenticacion para poder hacer el log in
     const handleAuth = () => {
         auth.signInWithPopup(provider).then( (result)=> {
