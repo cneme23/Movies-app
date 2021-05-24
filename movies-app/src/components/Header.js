@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { auth, provider } from "../firebase";
 
 const Header = (props) => {
+    
+    //Aca defino la funcion que me va a permitir realizar la autenticacion para poder hacer el log in
     const handleAuth = () => {
         auth.signInWithPopup(provider).then( (result)=> {
             console.log(result);
@@ -40,6 +42,7 @@ const Header = (props) => {
                 </a>
                 
             </NavMenu>
+            {/* Aca agrego la funcionalidad al componente */}
             <Login onClick={handleAuth}>Login</Login>
         </Nav>
 
