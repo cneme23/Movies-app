@@ -1,24 +1,49 @@
 import React from "react";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
+//useDispatch nos va a permitir mandar acciones a nuestro Store y selector nos va a permitir traer cosas de nuestro store
+import {useDispatch,useSelector} from "react-redux";
+import {useHistory } from "react-router-dom";
+import {selectUserName,selectUserPhoto,setUserLoginDetails} from "../features/user/userSlice";
 
 const Header = (props) => {
-    
+    const dispatch = useDispatch();
+    //nos va a servir para acceder a nuestra history
+    const history = useHistory();
+    const userName= useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
     //Aca defino la funcion que me va a permitir realizar la autenticacion para poder hacer el log in
     const handleAuth = () => {
         auth.signInWithPopup(provider).then( (result)=> {
-            console.log(result);
+            setUser(result.user);
         })
         .catch((error) => {
             alert(error.message);
         } );
+    };
+
+    const setUser=(user)=> {
+        dispatch(
+            setUserLoginDetails({
+                name:user.displayName,
+                email:user.email,
+                photo:user.photoURL,
+            })
+        );
     }
+
     return (
 
         <Nav>
             <Logo>
                 <img src="/images/logo.svg" alt="Disney +"/>
             </Logo>
+            {!userName ? (
+                <Login onClick={handleAuth}>Login</Login>): (
+                
+                <>
+                 
+            
             <NavMenu>
                 <a href="/home">
                     <img src="/images/home-icon.svg" alt="HOME" />
@@ -42,8 +67,9 @@ const Header = (props) => {
                 </a>
                 
             </NavMenu>
-            {/* Aca agrego la funcionalidad al componente */}
-            <Login onClick={handleAuth}>Login</Login>
+        <UserImg src={userPhoto} alt = {userName}/>
+            </>
+)}
         </Nav>
 
     )
@@ -170,6 +196,10 @@ transition:all 0.2s ease 0s;
     border-color: transparent;
 } 
 
+`;
+
+const UserImg = styled.img`
+height:100%;
 `;
 
 export default Header;
