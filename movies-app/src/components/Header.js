@@ -5,7 +5,7 @@ import { auth, provider } from "../firebase";
 //useDispatch nos va a permitir mandar acciones a nuestro Store y selector nos va a permitir traer cosas de nuestro store
 import {useDispatch,useSelector} from "react-redux";
 import {useHistory } from "react-router-dom";
-import {selectUserName,selectUserPhoto,setUserLoginDetails} from "../features/user/userSlice";
+import {selectUserName,selectUserPhoto,setUserLoginDetails,setSignOutState} from "../features/user/userSlice";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -27,13 +27,19 @@ const Header = (props) => {
     
     //Aca defino la funcion que me va a permitir realizar la autenticacion para poder hacer el log in
     const handleAuth = () => {
+        if(!userName){
         auth.signInWithPopup(provider).then( (result)=> {
             setUser(result.user);
         })
         .catch((error) => {
             alert(error.message);
         } );
-    };
+    }else if (userName){
+        auth.signOut().then(() => {
+           dispatch(setSignOutState())
+           history.push("/") 
+        }).catch((err) => alert(err.message))
+    }
 
     const setUser=(user)=> {
         dispatch(
@@ -232,13 +238,41 @@ const DropDown = styled.div`
     font-size:14px;
     letter-spacing: 3px;
     width:100px;
+    opacity: 0;
+
+
 
 
 
 
 
 `;
-const SignOut = styled.div``;
+const SignOut = styled.div`
+position:relative;
+height:48px;
+width: 48px;
+display: flex;
+cursor: pointer;
+align-items:center;
+justify-content: center;
+
+
+${UserImg}{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+
+}
+
+&:hover {
+    ${DropDown}{
+        opacity: 1;
+        transition-duration: 1s;
+    }
+}
+
+
+`;
 
 
 
