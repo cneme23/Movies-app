@@ -25,6 +25,7 @@ const Header = (props) => {
     });
   }, [userName]);
 
+  //Aca esta la funcionalidad del Logout
   const handleAuth = () => {
     if (!userName) {
       auth
