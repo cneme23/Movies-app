@@ -80,7 +80,12 @@ const Header = (props) => {
                 </a>
                 
             </NavMenu>
-        <UserImg src={userPhoto} alt = {userName}/>
+            <SignOut>
+                <UserImg src={userPhoto} alt = {userName}/>
+                <DropDown>
+                    <span onClick={handleAuth}>Sign out </span>
+                </DropDown>
+            </SignOut>
             </>
 )}
         </Nav>
@@ -214,6 +219,12 @@ transition:all 0.2s ease 0s;
 const UserImg = styled.img`
 height:100%;
 `;
+
+const DropDown = styled.div``;
+const SignOut = styled.div``;
+
+
+
 
 export default Header;
 
