@@ -78,7 +78,7 @@ const Header = (props) => {
             </a>
             <a>
               <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
-              <span>WATCHLIST</span>
+              <span>WATCHLIST </span>
             </a>
             <a>
               <img src="/images/original-icon.svg" alt="ORIGINALS" />
