@@ -7,6 +7,7 @@ import Trending from "./Trending";
 import Viewers from "./Viewers";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+//ESto nos permite usar la base de datos 
 import db from "../firebase";
 import { setMovies } from "../features/movie/movieSlice";
 import { selectUserName } from "../features/user/userSlice";
