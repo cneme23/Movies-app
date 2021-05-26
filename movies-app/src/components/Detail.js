@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import db from "../firebase";
 
+
 const Detail = (props) => {
   const { id } = useParams();
   const [detailData, setDetailData] = useState({});
@@ -40,7 +41,7 @@ const Detail = (props) => {
           </Player>
           <Trailer>
             <img src="/images/play-icon-white.png" alt="" />
-            <span>Trailer</span>
+            <span >Trailer</span>
           </Trailer>
           <AddList>
             <span />
